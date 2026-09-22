@@ -1,41 +1,23 @@
-//your code here!
-const list = document.getElementById("list");
+const list = document.getElementById("infi-list");
 
 let count = 1;
 
-
 // Add a list item
-function addItem() {
-  const li = document.createElement("li");
-
-  li.textContent = "List Item " + count;
-
-  list.appendChild(li);
-
-  count++;
-}
-
-
-// Add 10 items by default
-for (let i = 0; i < 10; i++) {
-  addItem();
-}
-
-
-// Add 2 more items when user reaches the bottom
-window.addEventListener("scroll", function () {
-
-  const scrollPosition =
-    window.innerHeight + window.scrollY;
-
-  const pageHeight =
-    document.documentElement.scrollHeight;
-
-  if (scrollPosition >= pageHeight - 5) {
-
-    addItem();
-    addItem();
-
+function addItems(number) {
+  for (let i = 0; i < number; i++) {
+    const li = document.createElement("li");
+    li.textContent = "List Item " + count;
+    list.appendChild(li);
+    count++;
   }
+}
 
+// Add 10 items initially
+addItems(10);
+
+// Add 2 more items when reaching the bottom
+list.addEventListener("scroll", function () {
+  if (list.scrollTop + list.clientHeight >= list.scrollHeight - 5) {
+    addItems(2);
+  }
 });
